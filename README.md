@@ -201,6 +201,11 @@ Once the application starts, you can use the following `curl` commands to intera
 A `docker-compose.yml` and `docker-compose.test.yml` files are configured for running the application and test enviorment along with PostgreSQL
 1. Clone the repository onto your machine
 2. Open terminal at your cloned location
+3. Build the project using following command:
+```bash
+./gradlew build -x test
+```
+
 ### To run using Docker Compose, execute:
 ```bash
 docker-compose build
@@ -211,6 +216,7 @@ docker-compose up
 To stop and remove the running containers, use the following command:
 
 ```bash
+ctrl+c then
 docker-compose down -v
 ```
 
@@ -236,6 +242,7 @@ docker-compose -f docker-compose.test.yml up
 To stop and remove the test containers, use the following command:
 
 ```bash
+ctrl+c then
 docker-compose -f docker-compose.test.yml down -v
 ```
 
