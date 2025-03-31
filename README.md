@@ -7,12 +7,12 @@ A Spring Boot application for managing SWIFT codes. This project parses SWIFT co
 - [Tech Stack](#tech-stack)
 - [Setup Instructions](#setup-instructions)
   - [Prerequisites](#prerequisites)
-  - [Database Setup](#database-setup)
+  - [Local Database Setup](#local-database-setup)
   - [Local Environment Configuration](#local-environment-configuration)
 - [Building the Project](#building-the-project)
 - [Running the Application](#running-the-application)
   - [Running Locally](#running-locally)
-  - [Containerizing with Docker](#containerizing-with-docker)
+  - [Running with Docker](#running-with-docker)
 - [Testing](#testing)
 - [Dependencies and Versions](#dependencies-and-versions)
 
@@ -77,26 +77,35 @@ This application reads SWIFT code data from a spreadsheet, processes and stores 
 - **Docker & Docker Compose** (for containerized deployment)
 - **Gradle** (using the Gradle Wrapper is recommended)
 
-### Database Setup
+### Local Database Setup
 
-Create the PostgreSQL database manually (if not already created):
+Run these commands as superuser (postgres) on your psql server to create the production user and database:
 ```sql
+CREATE USER wojtek WITH PASSWORD 'postgres';
+
 CREATE DATABASE swiftdb;
+
+GRANT ALL PRIVILEGES ON DATABASE swiftdb TO wojtek;
 ```
-Or for testing purposes (if using test properties):
+Run these commands to create the test user and database (if using test properties):
 ```sql
+CREATE USER test WITH PASSWORD 'test';
+
 CREATE DATABASE testdb;
+
+GRANT ALL PRIVILEGES ON DATABASE testdb TO test;
 ```
 
 ### Local Environment Configuration
 
-All enviorment configurations of the app are located in an `application.properties` file (in `src/main/resources`)
+All enviorment configurations of the app u might need to change to your preferences are located in an `application.properties` file (in `src/main/resources`)
 
 Configuration for testing is located in `application-test.properties` file (in src/test/resources)
 
 ### Building the Project
 
-To build the project, run:
+- Clone the repository to your machine
+- To build the project, run:
 
 ```bash
 ./gradlew clean build
@@ -106,8 +115,7 @@ This command compiles the project, runs tests, and packages the application.
 ## Running the Application
 
 ### Running Locally
-- Clone the repository to your machine
-- You can run the application locally using the Gradle BootRun task:
+You can run the application locally using the Gradle BootRun task (remember to install Gradle before):
 
 ```bash
 ./gradlew bootRun
@@ -187,7 +195,7 @@ Once the application starts, you can use the following `curl` commands to intera
     curl -X POST "http://localhost:8080/actuator/shutdown"
     ```
 
-## Containerizing with Docker
+## Running with Docker
 
 A `docker-compose.yml` and `docker-compose.test.yml` files are configured for running the application and test enviorment along with PostgreSQL
 
@@ -214,7 +222,7 @@ docker-compose down -v
 ./gradlew test
 ```
 
-### Running Tests through Docker
+### Running Tests on Docker
 
 #### Run Tests
 ```bash
