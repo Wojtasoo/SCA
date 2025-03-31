@@ -105,6 +105,7 @@ Configuration for testing is located in `application-test.properties` file (in s
 ### Building the Project
 
 - Clone the repository to your machine
+- Open terminal at the cloned location
 - To build the project, run:
 
 ```bash
@@ -198,7 +199,8 @@ Once the application starts, you can use the following `curl` commands to intera
 ## Running with Docker
 
 A `docker-compose.yml` and `docker-compose.test.yml` files are configured for running the application and test enviorment along with PostgreSQL
-
+1. Clone the repository onto your machine
+2. Open terminal at your cloned location
 ### To run using Docker Compose, execute:
 ```bash
 docker-compose build
