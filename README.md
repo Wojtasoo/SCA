@@ -36,6 +36,37 @@ This application reads SWIFT code data from a spreadsheet, processes and stores 
 - **Testing:** JUnit 5 and Spring Boot Starter Test
 - **Containerization:** Docker and Docker Compose
 
+## Project Structure
+```bash
+.
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── swiftcodes
+│   │   │       └── service
+│   │   │           └── app
+│   │   │               ├── APIController.java
+│   │   │               ├── APIDTO.java
+│   │   │               ├── SwiftCode.java
+│   │   │               ├── SwiftCodeService.java
+│   │   │               └── SwiftCodesApplication.java
+│   │   └── resources
+│   │       ├── application.properties
+│   │       └── SWIFT_CODES.xlsx
+│   └── test
+│       ├── java
+│       │   └── swiftcodes
+│       │       └── service
+│       │           └── app
+│       │               ├── APIControllerIntegrationTest.java
+│       │               ├── SwiftCodeServiceTest.java
+│       │               └── SwiftCodeIntegrationTest.java
+│       └── resources
+│           └── application-test.properties
+├── build.gradle.kts
+└── README.md
+```
+
 ## Setup Instructions
 
 ### Prerequisites
