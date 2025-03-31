@@ -73,7 +73,7 @@ This application reads SWIFT code data from a spreadsheet, processes and stores 
 ### Prerequisites
 
 - **Java 21 JDK**
-- **PostgreSQL** (ensure that PostgreSQL is installed and running)
+- **PostgreSQL** (ensure that PostgreSQL is installed and RUNNING)
 - **Docker & Docker Compose** (for containerized deployment)
 - **Gradle** (using the Gradle Wrapper is recommended)
 
