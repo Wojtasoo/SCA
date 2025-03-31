@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres:16
+    container_name: swift-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: swiftdb
+      POSTGRES_USER: wojtek
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: swift-app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/swiftdb
+      DB_USERNAME: wojtek
+      DB_PASSWORD: postgres
+    depends_on:
+      - db
+
+volumes:
+  db_data:

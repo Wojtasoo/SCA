@@ -1,0 +1,27 @@
+services:
+  test-db:
+    image: postgres:16
+    container_name: swift-test-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: swiftdb_test
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+    ports:
+      - "5433:5432"
+    volumes:
+      - test_db_data:/var/lib/postgresql/data
+
+  test-runner:
+    build: .
+    container_name: swift-test-runner
+    environment:
+      DB_URL: jdbc:postgresql://test-db:5432/swiftdb_test
+      DB_USERNAME: test
+      DB_PASSWORD: test
+    depends_on:
+      - test-db
+    command: ["./gradlew", "test"]
+
+volumes:
+  test_db_data:
