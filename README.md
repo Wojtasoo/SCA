@@ -190,8 +190,18 @@ Once the application starts, you can use the following `curl` commands to intera
 
 A `docker-compose.yml` and `docker-compose.test.yml` files are configured for running the application and test enviorment along with PostgreSQL
 
-To run using Docker Compose, execute:
-docker-compose up --build
+### To run using Docker Compose, execute:
+```bash
+docker-compose build
+docker-compose up
+```
+
+### Shutting Down the Containers
+To stop and remove the running containers, use the following command:
+
+```bash
+docker-compose down -v
+```
 
 ## Testing
 
@@ -204,6 +214,19 @@ docker-compose up --build
 ```
 
 ### Running Tests through Docker
+
+#### Run Tests
+```bash
+docker-compose -f docker-compose.test.yml build
+docker-compose -f docker-compose.test.yml up
+```
+
+#### Shutting Down the Containers
+To stop and remove the test containers, use the following command:
+
+```bash
+docker-compose -f docker-compose.test.yml down -v
+```
 
 ## Test Coverage
 
