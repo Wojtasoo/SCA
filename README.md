@@ -12,7 +12,7 @@ A Spring Boot application for managing SWIFT codes. This project parses SWIFT co
 - [Building the Project](#building-the-project)
 - [Running the Application](#running-the-application)
   - [Running Locally](#running-locally)
-  - [Containerizing with Docker Compose](#containerizing-with-docker-compose)
+  - [Containerizing with Docker](#containerizing-with-docker)
 - [Testing](#testing)
 - [Dependencies and Versions](#dependencies-and-versions)
 
@@ -58,34 +58,9 @@ CREATE DATABASE testdb;
 
 ### Local Environment Configuration
 
-Create an `application.properties` file (in `src/main/resources`) with the following content:
+All enviorment configurations of the app are located in an `application.properties` file (in `src/main/resources`)
 
-```properties
-# Application Properties
-spring.datasource.url=${DB_URL:jdbc:postgresql://localhost:5432/swiftdb}
-spring.datasource.username=${DB_USERNAME:wojtek}
-spring.datasource.password=${DB_PASSWORD:postgres}
-spring.datasource.driver-class-name=org.postgresql.Driver
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-spring.jpa.show-sql=true
-
-# JSON output formatting
-spring.jackson.serialization.indent-output=true
-
-# Server settings
-server.port=8080
-
-For testing, create an application-test.properties file (in src/test/resources):
-
-# Test-specific properties (using an embedded or separate test database)
-spring.datasource.url=${DB_URL:jdbc:postgresql://localhost:5432/testdb}
-spring.datasource.username=${DB_USERNAME:test}
-spring.datasource.password=${DB_PASSWORD:test}
-spring.datasource.driver-class-name=org.postgresql.Driver
-spring.jpa.hibernate.ddl-auto=create-drop
-spring.jpa.show-sql=true
-```
+Configuration for testing is located in `application-test.properties` file (in src/test/resources)
 
 ### Building the Project
 
@@ -94,47 +69,95 @@ To build the project, run:
 ```bash
 ./gradlew clean build
 ```
-
 This command compiles the project, runs tests, and packages the application.
 
 ## Running the Application
 
 ### Running Locally
-
-You can run the application locally using the Gradle BootRun task:
+- Clone the repository to your machine
+- You can run the application locally using the Gradle BootRun task:
 
 ```bash
 ./gradlew bootRun
 ```
 The app will start on http://localhost:8080
 
-## Containerizing with Docker Compose
+Once the application starts, you can use the following `curl` commands to interact with the API:
 
-A sample `docker-compose.yml` file for running the application along with PostgreSQL:
+#### Available Endpoints
+- **Using Windows(Powershell)**
 
-```yaml
-version: '3.8'
-services:
-  app:
-    build: .
-    ports:
-      - "8080:8080"
-    environment:
-      - DB_URL=jdbc:postgresql://db:5432/swiftdb
-      - DB_USERNAME=wojtek
-      - DB_PASSWORD=postgres
-    depends_on:
-      - db
+  - **Retrieve SWIFT Code Details**
+    ```powershell
+    curl.exe -X GET "http://localhost:8080/v1/swift-codes/BCECCLRMXXX"
+    ```
+  
+  - **Retrieve All SWIFT Codes for a Specific Country**  
+  
+    ```powershell
+    curl.exe -X GET "http://localhost:8080/v1/swift-codes/country/PL"
+    ```
+  
+  - **Add a New SWIFT Code**  
+  
+    ```powershell
+    curl.exe -X POST "http://localhost:8080/v1/swift-codes" `
+       -H "Content-Type: application/json" `
+       -H "Accept: application/json" `
+       -d '{\"swiftCode\": \"TESTCLRMIXXX\", \"bankName\": \"Test Bank\", \"address\": \"\", \"countryISO2\": \"CL\", \"countryName\": \"Chile\", \"isHeadquarter\": true}'
+    ```
+  
+  - **Delete a SWIFT Code**  
+  
+    ```powershell
+    curl.exe -X DELETE "http://localhost:8080/v1/swift-codes/TESTCLRMIXXX" `
+       -H "Content-Type: application/json" `
+       -H "Accept: application/json"
+    ```
+  
+  - **Additionaly to Gracefully Shutdown the App**  
+  
+    ```powershell
+    curl.exe -X POST http://localhost:8080/actuator/shutdown
+    ```
+- **Using Linux(Bash)**
+    - **Retrieve SWIFT Code Details**
+    ```bash
+    curl -X GET "http://localhost:8080/v1/swift-codes/BCECCLRMXXX"
+    ```
+  
+  - **Retrieve All SWIFT Codes for a Specific Country**  
+  
+    ```bash
+    curl -X GET "http://localhost:8080/v1/swift-codes/country/PL"
+    ```
+  
+  - **Add a New SWIFT Code**  
+  
+    ```bash
+    curl -X POST "http://localhost:8080/v1/swift-codes" \
+     -H "Content-Type: application/json" \
+     -H "Accept: application/json" \
+     -d '{"swiftCode": "TESTCLRMIXXX", "bankName": "Test Bank", "address": "", "countryISO2": "CL", "countryName": "Chile", "isHeadquarter": true}'
+    ```
+  
+  - **Delete a SWIFT Code**  
+  
+    ```bash
+    curl -X DELETE "http://localhost:8080/v1/swift-codes/TESTCLRMIXXX" \
+     -H "Content-Type: application/json" \
+     -H "Accept: application/json"
+    ```
+  
+  - **Additionaly to Gracefully Shutdown the App**  
+  
+    ```bash
+    curl -X POST "http://localhost:8080/actuator/shutdown"
+    ```
 
-  db:
-    image: postgres:13
-    environment:
-      POSTGRES_DB: swiftdb
-      POSTGRES_USER: wojtek
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - "5432:5432"
-```
+## Containerizing with Docker
+
+A `docker-compose.yml` and `docker-compose.test.yml` files are configured for running the application and test enviorment along with PostgreSQL
 
 To run using Docker Compose, execute:
 docker-compose up --build
@@ -142,12 +165,14 @@ docker-compose up --build
 ## Testing
 
 ### Running Tests Locally
-
-To run all tests, execute:
+- Clone the repository to your machine
+- To run all tests, in terminal execute:
 
 ```bash
 ./gradlew test
 ```
+
+### Running Tests through Docker
 
 ## Test Coverage
 
