@@ -30,7 +30,7 @@ This application reads SWIFT code data from a spreadsheet, processes and stores 
 - **Language:** Java 21
 - **Framework:** Spring Boot 3.3.5
 - **JPA & ORM:** Hibernate 6.5.3.Final with Jakarta Persistence
-- **Database:** PostgreSQL (tested with version 42.7.2 driver)
+- **Database:** PostgreSQL ver.16 (tested with version 42.7.2 driver)
 - **Excel Parsing:** Apache POI 5.2.3
 - **Build Tool:** Gradle with Kotlin DSL
 - **Testing:** JUnit 5 and Spring Boot Starter Test
