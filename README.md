@@ -250,6 +250,6 @@ The test suite covers:
 - **Spring Data JPA:** (via Spring Boot Starter Data JPA)  
 - **PostgreSQL Driver:** 42.7.2  
 - **Apache POI (for Excel):** 5.2.3  
-- **JUnit 5:** As specified via `libs.junit` (check your Gradle version catalogs)  
+- **JUnit 5:** As specified via `libs.junit` 
 - **Gradle:** Using Gradle 8.7 with Kotlin DSL  
 - **Docker & Docker Compose:** Ensure Docker is installed and running on your machine  
