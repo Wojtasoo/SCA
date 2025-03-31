@@ -231,7 +231,7 @@ docker-compose down -v
 ```
 
 ### Running Tests on Docker
-
+- Simply running the second container initializes testdb and performs all tests during build/start of the container
 #### Run Tests
 ```bash
 docker-compose -f docker-compose.test.yml build
