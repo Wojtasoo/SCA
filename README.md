@@ -163,6 +163,5 @@ The test suite covers:
 - **PostgreSQL Driver:** 42.7.2  
 - **Apache POI (for Excel):** 5.2.3  
 - **JUnit 5:** As specified via `libs.junit` (check your Gradle version catalogs)  
-- **Guava:** (as per your dependency configuration)  
 - **Gradle:** Using Gradle 8.7 with Kotlin DSL  
 - **Docker & Docker Compose:** Ensure Docker is installed and running on your machine  
