@@ -35,6 +35,7 @@ This application reads SWIFT code data from a spreadsheet, processes and stores 
 - **Build Tool:** Gradle with Kotlin DSL
 - **Testing:** JUnit 5 and Spring Boot Starter Test
 - **Containerization:** Docker and Docker Compose
+- **IDE:** IntelliJ IDEA Community Edition 2024.1
 
 ## Project Structure
 ```bash
