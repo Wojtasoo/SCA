@@ -1,5 +1,5 @@
 # SCA
-A Spring Boot application for managing SWIFT codes. This project parses SWIFT code data (from an Excel or CSV file), stores it in a PostgreSQL database, and exposes a RESTful API for retrieving, adding, and deleting SWIFT code records.
+A Spring Boot application for managing SWIFT codes. This project parses SWIFT code data (from an Excel), stores it in a PostgreSQL database, and exposes a RESTful API for retrieving, adding, and deleting SWIFT code records.
 
 ## Table of Contents
 
